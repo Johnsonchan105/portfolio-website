@@ -3,6 +3,7 @@ import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
 import '../styles/Intro.css';
 import FadeInSection from "./FadeInSection";
+import HologramBrain from "./HologramBrain";
 
 class Intro extends React.Component {
     constructor(){
@@ -50,6 +51,7 @@ class Intro extends React.Component {
                         {" Resume"}
                     </a>
                 </FadeInSection>
+                <HologramBrain />
             </div>
         );
     }
