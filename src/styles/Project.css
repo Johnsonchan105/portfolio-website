@@ -1,0 +1,73 @@
+#projects {
+  padding-top: 2%;
+  padding-left: 15%;
+  min-height: 60vh;
+}
+
+#projects-container {
+  width: 55vw;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.project-card {
+  border-left: 2px solid var(--light-navy);
+  padding-left: 24px;
+}
+
+.project-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-title {
+  font-family: "NTR", sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--slate);
+}
+
+.project-duration {
+  font-family: "NTR", sans-serif;
+  font-size: 18px;
+  color: var(--bright-blue);
+}
+
+.project-description {
+  padding-top: 16px;
+  max-width: 650px;
+  font-family: "NTR", sans-serif;
+  font-size: 20px;
+}
+
+.project-description li {
+  position: relative;
+  padding-left: 30px;
+  padding-bottom: 16px;
+  font-size: 18px;
+  color: var(--slate);
+}
+
+.project-description li::before {
+  content: "▹    ";
+  color: var(--bright-blue);
+  position: absolute;
+  left: 0;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.project-tag {
+  font-family: "NTR", sans-serif;
+  font-size: 14px;
+  color: var(--bright-blue);
+  border: 1px solid var(--bright-blue);
+  border-radius: 20px;
+  padding: 4px 12px;
+}
