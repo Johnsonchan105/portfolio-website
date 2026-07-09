@@ -38,15 +38,16 @@ class Intro extends React.Component {
                         className="intro-button"
                     >
                         <EmailRoundedIcon></EmailRoundedIcon>
-                        {" " + "Contact Me!"}
+                        {" Contact Me!"}
                     </a>
                     <a
                         href="https://drive.google.com/file/d/1OYOH-LgI89i5cpaaOWcLSKE8ddrBbeJZ/view?usp=sharing"
                         className="intro-button"
                         target={"_blank"}
+                        rel="noreferrer"
                     >
                         <DescriptionRoundedIcon></DescriptionRoundedIcon>
-                        {" " + "Resume"}
+                        {" Resume"}
                     </a>
                 </FadeInSection>
             </div>

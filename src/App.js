@@ -21,6 +21,7 @@ function App() {
         <Intro></Intro>
         <About></About>
         <Experience></Experience>
+        <Projects></Projects>
         <Footer></Footer>
       </div>
       <SideBarNav/>

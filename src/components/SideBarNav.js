@@ -42,6 +42,7 @@ class SideBarNav extends React.Component {
           intro: document.getElementById("intro").offsetTop,
           about: document.getElementById("about").offsetTop,
           experience: document.getElementById("experience").offsetTop,
+          projects: document.getElementById("projects").offsetTop,
           // Add more sections as needed
         };
       
@@ -71,9 +72,8 @@ class SideBarNav extends React.Component {
         const links = [
             { id: "intro", text: "home" },
             { id: "about", text: "about" },
-            { id: "experience", text: "experience" }/*,
+            { id: "experience", text: "experience" },
             { id: "projects", text: "projects" }
-            */
         ];
 
         return (
