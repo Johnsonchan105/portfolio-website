@@ -1,11 +1,14 @@
 #experience {
     padding-top: 2%;
     padding-left: 15%;
+    padding-right: 15%;
     min-height: 60vh;
+    box-sizing: border-box;
 }
 
 #experience-container {
   width: 55vw;
+  max-width: 100%;
 }
 
 .joblist-job-title {
@@ -13,7 +16,6 @@
   font-size: 28px;
   font-weight: bold;
   color: var(--slate);
-  width: 100vw;
 }
 
 .joblist-job-company {
@@ -80,4 +82,28 @@ ul {
 
 .tab-content-exit-active {
   transition: height 0.3s ease-in-out;
+}
+
+.MuiTabs-scrollButtons.Mui-disabled {
+  opacity: 0.3;
+}
+
+@media (max-width: 900px) {
+  #experience {
+    padding-left: 7%;
+    padding-right: 7%;
+  }
+
+  #experience-container {
+    width: 100%;
+  }
+
+  .joblist-job-title,
+  .joblist-job-company {
+    font-size: 22px;
+  }
+
+  .job-description {
+    max-width: 100%;
+  }
 }

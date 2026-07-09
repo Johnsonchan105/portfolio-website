@@ -25,6 +25,12 @@ cd ~/stacks/portfolio && git pull && docker compose build && docker compose up -
    cloudflared tunnel create portfolio
    cloudflared tunnel route dns portfolio johnsonchan.dev
    ```
+
+   If `cloudflared tunnel route dns` fails with `An A, AAAA, or CNAME record
+   with that host already exists`, open Cloudflare DNS for the zone and delete
+   only the conflicting `A`, `AAAA`, or `CNAME` record for `@` /
+   `johnsonchan.dev`, then rerun the route command. Keep any unrelated records
+   such as `NS`, `SOA`, `MX`, or ownership-verification `TXT` records.
 4. `~/.cloudflared/config.yml`:
    ```yaml
    tunnel: portfolio

@@ -71,6 +71,36 @@
     height: 18px;
 }
 
+@media (max-width: 900px) {
+    /* The link list is a desktop-only affordance (there's a real top-of-page
+       nav pattern would be needed to replace it); on narrow screens it has
+       no room, so hide it and rely on natural scroll + the icon bar below.
+       Belt-and-suspenders for the JS isMobile flag, which is computed once
+       at module load and won't react to viewport changes after mount. */
+    .rs-sidenav {
+        display: none;
+    }
+
+    .sidebar-nav {
+        top: auto;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        padding-right: 0;
+        align-items: center;
+        background-color: rgba(9, 8, 47, 0.9);
+        backdrop-filter: blur(4px);
+    }
+
+    .sidebar-logos {
+        width: auto;
+        gap: 24px;
+        padding: 10px 20px;
+        justify-content: center;
+    }
+}
+
 .sidebar-links a.active-link {
     color: white !important; 
     opacity: 100%;

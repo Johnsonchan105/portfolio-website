@@ -3,6 +3,16 @@
   display: flex;
   flex-direction: row;
   overflow: hidden;
+  width: 100%;
+}
+
+/* #content is the main flex column; without min-width:0 a flex item defaults
+   to min-width:auto, so any unbreakable child (e.g. the intro headline) can
+   force this wider than the viewport and get silently clipped. */
+#content {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
 }
 
 html {
@@ -12,12 +22,12 @@ html {
 .section-header {
   display: flex;
   padding-bottom: 25px;
-  width: 100vw;
+  width: 100%;
 }
 .section-title {
   font-family: "NTR",sans-serif;
   color: var(--slate);
-  font-size: 46px;
+  font-size: clamp(28px, 5vw, 46px);
   font-weight: bold;
 }
 

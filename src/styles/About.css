@@ -2,6 +2,7 @@
     padding-left: 15%;
     padding-right: 15%;
     min-height: 60vh;
+    box-sizing: border-box;
 }
 
 .about-desc ul {
@@ -71,4 +72,31 @@
 
 .slide_img:hover {
     transform: translateY(-7px);
+}
+
+@media (max-width: 900px) {
+    #about {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
+    .about-content {
+        flex-direction: column;
+    }
+
+    .about-desc {
+        max-width: 100%;
+    }
+
+    .about-desc ul {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 10px;
+    }
+
+    .about-me-img {
+        margin-top: 30px;
+        padding-left: 0;
+        display: flex;
+        justify-content: center;
+    }
 }

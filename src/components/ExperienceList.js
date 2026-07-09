@@ -104,7 +104,8 @@ const ExperienceList = () => {
             <Tabs
                 value = {value}
                 onChange={handleChange}
-                variant={"standard"}
+                variant="scrollable"
+                scrollButtons="auto"
             >
                 {Object.keys(experienceItems).map((key, i) => (
                     <Tab label={key} {...a11yProps(i)} />

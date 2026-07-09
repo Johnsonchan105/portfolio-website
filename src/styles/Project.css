@@ -1,11 +1,14 @@
 #projects {
   padding-top: 2%;
   padding-left: 15%;
+  padding-right: 15%;
   min-height: 60vh;
+  box-sizing: border-box;
 }
 
 #projects-container {
   width: 55vw;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -70,4 +73,23 @@
   border: 1px solid var(--bright-blue);
   border-radius: 20px;
   padding: 4px 12px;
+}
+
+@media (max-width: 900px) {
+  #projects {
+    padding-left: 7%;
+    padding-right: 7%;
+  }
+
+  #projects-container {
+    width: 100%;
+  }
+
+  .project-title {
+    font-size: 22px;
+  }
+
+  .project-description {
+    max-width: 100%;
+  }
 }

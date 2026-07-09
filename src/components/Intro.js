@@ -41,7 +41,7 @@ class Intro extends React.Component {
                         {" Contact Me!"}
                     </a>
                     <a
-                        href="https://drive.google.com/file/d/1OYOH-LgI89i5cpaaOWcLSKE8ddrBbeJZ/view?usp=sharing"
+                        href="/resume.pdf"
                         className="intro-button"
                         target={"_blank"}
                         rel="noreferrer"
