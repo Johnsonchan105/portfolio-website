@@ -1,22 +1,22 @@
-import React, { Suspense, useMemo, useRef } from "react";
+import React, { Suspense, useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
-import { Bloom, EffectComposer, Noise, Vignette } from "@react-three/postprocessing";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import * as THREE from "three";
 import "../styles/HologramBrain.css";
 
 // Scene tuning: increase these carefully on lower-powered hosting hardware.
-const MODEL_SIZE = 3.25; // Normalized model width in scene units.
+const MODEL_SIZE = 2.55; // Normalized model width in scene units.
 const MODEL_SCALE = 1; // Fine scale adjustment after normalization.
 const CAMERA_POSITION = [0, 0, 7];
 const CURSOR_SENSITIVITY_Y = 0.35;
 const CURSOR_SENSITIVITY_X = 0.22;
 const CURSOR_LERP = 0.065;
-const BRAIN_OPACITY = 0.32;
-const EMISSIVE_INTENSITY = 1.45;
-const WIREFRAME_OPACITY = 0.42;
-const BLOOM_INTENSITY = 1.05;
-const HUD_RING_SIZE = 2.25;
+const BRAIN_OPACITY = 0.2;
+const EMISSIVE_INTENSITY = 0.75;
+const WIREFRAME_OPACITY = 0.28;
+const BLOOM_INTENSITY = 0.6;
+const HUD_RING_SIZE = 1.8;
 
 function createHologramScene(sourceScene, material) {
   const scene = sourceScene.clone(true);
@@ -55,7 +55,13 @@ function BrainModel() {
     wireframe: createHologramScene(scene, wireframeMaterial),
   }), [scene, mainMaterial, wireframeMaterial]);
 
-  return <group><primitive object={main} /><primitive object={wireframe} scale={1.012} /></group>;
+  return (
+    <group>
+      <primitive object={main} />
+      {/* Scale the parent instead of overwriting the normalized GLB scale. */}
+      <group scale={1.012}><primitive object={wireframe} /></group>
+    </group>
+  );
 }
 
 function HudRing({ radius, arc, speed, offset = 0, z = -0.15 }) {
@@ -71,13 +77,13 @@ function HudRing({ radius, arc, speed, offset = 0, z = -0.15 }) {
   );
 }
 
-function HologramScene() {
+function HologramScene({ cursor }) {
   const rig = useRef();
-  useFrame(({ clock, pointer }) => {
+  useFrame(({ clock }) => {
     if (!rig.current) return;
     const time = clock.getElapsedTime();
-    const targetY = pointer.x * CURSOR_SENSITIVITY_Y;
-    const targetX = -pointer.y * CURSOR_SENSITIVITY_X;
+    const targetY = cursor.current.x * CURSOR_SENSITIVITY_Y;
+    const targetX = -cursor.current.y * CURSOR_SENSITIVITY_X;
     rig.current.rotation.y = THREE.MathUtils.lerp(rig.current.rotation.y, targetY, CURSOR_LERP);
     rig.current.rotation.x = THREE.MathUtils.lerp(rig.current.rotation.x, targetX, CURSOR_LERP);
     rig.current.rotation.z = Math.sin(time * 0.7) * 0.025;
@@ -91,13 +97,12 @@ function HologramScene() {
       <pointLight color="#00aa44" intensity={1.4} position={[-3, -1, 1]} />
       <group ref={rig}>
         <BrainModel />
-        <HudRing radius={HUD_RING_SIZE} arc={Math.PI * 1.45} speed={0.12} offset={0.4} />
-        <HudRing radius={HUD_RING_SIZE * 1.18} arc={Math.PI * 0.82} speed={-0.08} offset={2.1} z={-0.25} />
       </group>
+      {/* HUD is stationary; only the brain follows the cursor. */}
+      <HudRing radius={HUD_RING_SIZE} arc={Math.PI * 1.45} speed={0.12} offset={0.4} />
+      <HudRing radius={HUD_RING_SIZE * 1.18} arc={Math.PI * 0.82} speed={-0.08} offset={2.1} z={-0.25} />
       <EffectComposer multisampling={0} enableNormalPass={false}>
         <Bloom intensity={BLOOM_INTENSITY} luminanceThreshold={0.18} mipmapBlur radius={0.55} />
-        <Noise opacity={0.035} />
-        <Vignette eskil={false} offset={0.2} darkness={0.88} />
       </EffectComposer>
     </>
   );
@@ -105,20 +110,30 @@ function HologramScene() {
 
 /** A responsive, retro green hologram brain scene. */
 export default function HologramBrain({ className = "" }) {
+  const cursor = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const updateCursor = (event) => {
+      cursor.current.x = (event.clientX / window.innerWidth) * 2 - 1;
+      cursor.current.y = -((event.clientY / window.innerHeight) * 2 - 1);
+    };
+
+    window.addEventListener("pointermove", updateCursor, { passive: true });
+    return () => window.removeEventListener("pointermove", updateCursor);
+  }, []);
+
   return (
     <div className={`hologram-brain ${className}`.trim()} aria-label="Interactive holographic brain visualization">
       <Canvas
         className="hologram-brain__canvas"
         camera={{ position: CAMERA_POSITION, fov: 38 }}
         dpr={[1, 1.5]}
-        gl={{ antialias: false, alpha: false, powerPreference: "high-performance", stencil: false }}
+        gl={{ antialias: false, alpha: true, powerPreference: "high-performance", stencil: false }}
       >
-        <color attach="background" args={["#010604"]} />
-        <Suspense fallback={null}><HologramScene /></Suspense>
+        <Suspense fallback={null}><HologramScene cursor={cursor} /></Suspense>
       </Canvas>
       {/* Visual-only overlays allow the canvas to receive cursor movement. */}
       <div className="hologram-brain__scanlines" aria-hidden="true" />
-      <div className="hologram-brain__sweep" aria-hidden="true" />
     </div>
   );
 }
