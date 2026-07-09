@@ -8,7 +8,7 @@ const projects = [
         duration: "2026 - PRESENT",
         desc: [
             "Built a Python pipeline that pulls postings from company ATS boards (Greenhouse, Lever, Ashby, Workday) plus Gmail job-alert emails, dedupes them, and fit-scores each one against my resume.",
-            "Wrote a tailoring step that rewrites resume bullets per job description and renders a clean, honest PDF with no hidden or keyword-stuffed text.",
+            "Wrote a tailoring step that rewrites resume bullets per job description and renders a clean, ATS-friendly PDF with LaTeX.",
             "Automated application autofill with Playwright over the Chrome DevTools Protocol, resolving leftover fields with a targeted LLM pass and stopping at a review queue for a manual final submit.",
             "Deployed the stack with Docker on a home server to run a daily autonomous collection and scoring loop."
         ],
