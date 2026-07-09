@@ -38,27 +38,31 @@ class About extends React.Component {
     render(){
         const one = (
             <p>
-                Hi! My name is Cheng Han, but I go by Johnson! 
-                I am currently undertaking a <b>Bachelor’s of Science</b> in 
-                <b> Computer Science</b> at <a href="https://www.ucsb.edu/about">UCSB</a> and will be complete the degree in June 2024. 
-                Currently I am also taking an internship at <a href="https://channelislands.noaa.gov">Channel Islands National Marine Sanctuary</a> as a <b>Web Development and Data Visualization Intern</b>.
+                Hi! My name is Cheng Han, but I go by Johnson!
+                I graduated from <a href="https://www.ucsb.edu/about">UCSB</a> with a <b>Bachelor's of Science</b> in
+                <b> Computer Science</b> in June 2024.
+                Since then I've worked as a <b>Software Engineer</b> at <a href="https://www.appliedmaterials.com/">Applied Materials</a> and <a href="https://robinhood.com/">Robinhood</a>, and I build side projects in my free time, including an AI-driven job search agent that automates the whole job hunt end to end.
             </p>
         );
         const two = (
             <p>
-                Outside of work you’ll probably find me rock climbing, playing video games, or obsessing over my latest hyperfixation.
+                Outside of work you'll probably find me rock climbing, playing video games, or obsessing over my latest hyperfixation.
             </p>
         );
 
         const tech_stack = [
             'Python',
-            'AWS',
-            'Tensorflow',
-            'Maven',
-            'React.js',
-            'Angular.js',
+            'Java',
+            'Go',
+            'JavaScript',
+            'React',
+            'Node.js',
+            'SQL',
+            'Docker',
+            'Kubernetes',
+            'PyTorch',
             'Figma'
-        ];        
+        ];
 
         return (
             <div id='about'>
