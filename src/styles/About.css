@@ -64,6 +64,8 @@
   
 .slide {
     display: inline-block;
+    /* The slide advances the carousel on click, so it needs to read as one. */
+    cursor: pointer;
 }
 
 .slide_img {
