@@ -4,8 +4,8 @@
     align-items: flex-end;
     position: fixed;
     right: 0;
-    padding-right: 5%;
-    bottom: 10%;
+    padding-right: var(--sidebar-inset);
+    bottom: var(--sidebar-bottom);
     background-color: transparent;
 }
 

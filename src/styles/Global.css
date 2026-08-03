@@ -6,4 +6,15 @@
     --txt-gray: #94ACB4;
     --bright-blue: #068FFF;
     --light-navy: #8EABC9;
+
+    /* Geometry of the fixed right-hand nav. --sidebar-stack is the height of
+       that stack (four links plus the social row); the hologram brain docks
+       on top of it, so both files read these from one place. */
+    --sidebar-inset: 5%;
+    --sidebar-bottom: 10%;
+    --sidebar-stack: 168px;
+    /* Each nav link draws a trailing rule that overhangs its box by this much
+       (::after at left:100%, 25px wide, on top of 10px of padding). It is the
+       column's real right edge, so the hologram aligns to it. */
+    --sidebar-rule: 35px;
 }

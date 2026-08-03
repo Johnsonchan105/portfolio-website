@@ -1,30 +1,45 @@
+/* The hologram docks directly above the first sidebar link ("home"). Aligning
+   it to the nav's text edge leaves it looking shifted left, because the brain
+   is centred in its box while the links are flush right; pushing out to the
+   trailing rules puts it over the middle of the column. See Global.css. */
 .hologram-brain {
-    --scanline-opacity: 0.16;
     position: fixed;
     z-index: 5;
-    right: clamp(16px, 5vw, 80px);
-    top: clamp(72px, 11vw, 150px);
-    width: min(30vw, 400px);
-    height: min(30vw, 400px);
-    min-width: 280px;
-    min-height: 280px;
-    overflow: hidden;
-    isolation: isolate;
+    right: calc(var(--sidebar-inset) - var(--sidebar-rule));
+    bottom: calc(var(--sidebar-bottom) + var(--sidebar-stack) + 14px);
+    width: clamp(120px, 12vw, 168px);
+    height: clamp(120px, 12vw, 168px);
+    pointer-events: none;
+    background: transparent;
+    /* CSS glow instead of a bloom pass: no full-screen postprocessing quad,
+       so the canvas stays genuinely transparent and costs nothing. */
+    filter: drop-shadow(0 0 5px rgba(0, 255, 106, 0.45)) drop-shadow(0 0 14px rgba(0, 255, 106, 0.2));
+}
+
+.hologram-brain__canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
     background: transparent;
 }
 
-.hologram-brain__canvas { display: block; width: 100% !important; height: 100% !important; pointer-events: none; }
-.hologram-brain__scanlines { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-.hologram-brain__scanlines {
-    opacity: calc(var(--scanline-opacity) * 0.55);
-    background: repeating-linear-gradient(to bottom, rgba(0, 255, 102, 0.34) 0, rgba(0, 255, 102, 0.34) 1px, transparent 1px, transparent 4px);
-    mix-blend-mode: screen;
-    -webkit-mask-image: radial-gradient(ellipse at center, #000 28%, transparent 72%);
-    mask-image: radial-gradient(ellipse at center, #000 28%, transparent 72%);
+@media (max-width: 900px) {
+    /* The link list is hidden at this width, so there is no "home" to sit
+       above; drop the hologram back into the intro flow. */
+    .hologram-brain {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        width: min(52vw, 210px);
+        height: min(52vw, 210px);
+        margin: 26px auto 4px;
+        /* Phone screens are usually viewed in daylight - lift the glow. */
+        filter: drop-shadow(0 0 6px rgba(0, 255, 106, 0.5)) drop-shadow(0 0 18px rgba(0, 255, 106, 0.24));
+    }
 }
-@media (max-width: 1100px) {
-    .hologram-brain { right: 4vw; width: min(32vw, 360px); height: min(32vw, 360px); }
-}
-@media (max-width: 760px) {
-    .hologram-brain { position: relative; right: auto; top: auto; width: min(92vw, 360px); height: min(92vw, 360px); min-width: 0; min-height: 280px; margin: 24px auto 0; }
+
+@media (prefers-reduced-motion: reduce) {
+    .hologram-brain {
+        filter: drop-shadow(0 0 4px rgba(0, 255, 106, 0.35));
+    }
 }
